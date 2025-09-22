@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-QueenPro - Challenge Your Mind</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Authentication Modal -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="closeAuthModal">&times;</span>
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="signup">Sign Up</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <h2>Welcome Back!</h2>
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Login</button>
+                    <div id="loginError" class="error-message"></div>
+                </form>
+                
+                <!-- Signup Form -->
+                <form id="signupForm" class="auth-form">
+                    <h2>Join the Challenge!</h2>
+                    <div class="form-group">
+                        <label for="signupUsername">Choose Your Username</label>
+                        <input type="text" id="signupUsername" placeholder="Username" required>
+                        <div class="username-warning">
+                          ⚠️ <strong>Important:</strong> Your username is permanent and cannot be changed later. Choose wisely!  
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="signupEmail" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signupPassword" placeholder="Password (min 6 chars)" required>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="usernameAcknowledge" required>
+                            <span class="checkmark"></span>
+                            I understand that my username cannot be changed after account creation
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Sign Up</button>
+                    <div id="signupError" class="error-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app" class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>♛ N-QueenPro</h1>
+                </div>
+                <div class="header-nav">
+                    <button id="aboutUsBtn" class="nav-btn">
+                        <i class="info-icon">ℹ️</i>
+                        About Us
+                    </button>
+                </div>
+                <div class="user-section" id="userSection">
+                    <button id="loginBtn" class="btn btn-primary">Login</button>
+                    <div id="userInfo" class="user-info hidden">
+                        <span class="username" id="displayUsername">Player</span>
+                        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- About Us Modal -->
+        <div id="aboutUsModal" class="modal hidden">
+            <div class="modal-content about-us-modal">
+                <span class="close-btn" id="closeAboutModal">&times;</span>
+                
+                <div class="about-header">
+                    <h2>👨‍💻 Meet the Developer</h2>
+                    <p class="about-subtitle">Passionate about creating engaging puzzle experiences</p>
+                </div>
+                
+                <div class="developer-card">
+                    <div class="developer-image">
+                        <img src="https://avatars.githubusercontent.com/u/181719775?s=400&u=021d888025a489910b0cb86571d24c029fe2bba3&v=4" 
+                            alt="Developer Profile" 
+                            id="developerImage"
+                            class="profile-image">
+                        <div class="image-overlay">
+                            <span class="developer-title">Full Stack Developer</span>
+                        </div>
+                    </div>
+                    
+                    <div class="developer-info">
+                        <h3 class="developer-name" id="developerName">Your Name</h3>
+                        <p class="developer-description">
+                            Crafting innovative web applications with modern technologies. 
+                            Specializing in interactive games, user experience design, 
+                            and scalable full-stack solutions.
+                        </p>
+                        
+                        <div class="tech-stack">
+                            <h4>Tech Stack Used:</h4>
+                            <div class="tech-badges">
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">Supabase</span>
+                                <span class="tech-badge">Netlify</span>
+                                <span class="tech-badge">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-section">
+                    <h4>🤝 Let's Connect</h4>
+                    <div class="contact-links">
+                        <a href="mailto:akhilyadavbil@gmail.com" 
+                        id="developerEmail" 
+                        class="contact-link email-link"
+                        target="_blank">
+                            <span class="contact-icon">✉️</span>
+                            <span id="developerEmailText">akhilyadavbil@gmail.com</span>
+                        </a>
+                        
+                        <a href="https://linkedin.com/in/yourprofile" 
+                        id="developerLinkedIn" 
+                        class="contact-link linkedin-link"
+                        target="_blank">
+                            <i class="contact-icon">💼</i>
+                            <span>LinkedIn</span>
+                        </a>
+                        
+                        <a href="https://github.com/yourusername" 
+                        id="developerGitHub" 
+                        class="contact-link github-link"
+                        target="_blank">
+                            <i class="contact-icon">🔗</i>
+                            <span>GitHub</span>
+                        </a>
+                        
+                        <a href="https://yourportfolio.com" 
+                        id="developerPortfolio" 
+                        class="contact-link portfolio-link"
+                        target="_blank">
+                            <i class="contact-icon">🌐</i>
+                            <span>Portfolio</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="project-info">
+                    <h4>🎮 About This Project</h4>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">2025</span>
+                            <span class="stat-label">Built Year</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">5</span>
+                            <span class="stat-label">Difficulty Levels</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">∞</span>
+                            <span class="stat-label">Solutions Possible</span>
+                        </div>
+                    </div>
+                    
+                    <p class="project-description">
+                        N-QueenPro is a modern take on the classic N-Queens puzzle, 
+                        featuring progressive difficulty, competitive leaderboards, and 
+                        comprehensive player statistics. Built with vanilla JavaScript 
+                        and modern web technologies for optimal performance.
+                    </p>
+                </div>
+                
+                <div class="modal-footer">
+                    <p class="footer-text">
+                        ⭐ Enjoyed the game? Consider starring the repository or sharing with friends!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <main class="main-content">
+            <!-- Welcome Screen -->
+            <div id="welcomeScreen" class="welcome-screen">
+                <div class="welcome-content">
+                    <h2>Challenge Your Mind with N-Queen Puzzle</h2>
+                    <p>Place N queens on an N×N chessboard so that no two queens can attack each other!</p>
+                    <button id="startGameBtn" class="btn btn-large btn-primary">Start Playing</button>
+                </div>
+            </div>
+
+            <!-- Game Interface -->
+            <div id="gameInterface" class="game-interface hidden">
+                <!-- Game Controls -->
+                <div class="game-controls">
+                    <div class="control-group">
+                        <label for="boardSize">Board Size:</label>
+                        <select id="boardSize">
+                            <option value="4">4×4</option>
+                            <option value="5" selected>5×5</option>
+                            <option value="6">6×6</option>
+                            <option value="7">7×7</option>
+                            <option value="8">8×8</option>
+                        </select>
+                    </div>
+                    
+                    <button id="resetBtn" class="btn">Reset Board</button>
+                    <button id="hintBtn" class="btn btn-secondary">Get Hint</button>
+                    <button id="solveBtn" class="btn btn-primary">Show Solution</button>
+                </div>
+
+                <!-- Game Statistics -->
+                <div class="game-stats">
+                    <div class="stat-card">
+                        <span class="stat-value" id="queensCount">0</span>
+                        <span class="stat-label">Queens</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="movesCount">0</span>
+                        <span class="stat-label">Moves</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="gameTimer">00:00</span>
+                        <span class="stat-label">Time</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="hintsUsed">0</span>
+                        <span class="stat-label">Hints</span>
+                    </div>
+                </div>
+
+                <!-- Chessboard -->
+                <div class="chessboard-container">
+                    <div id="chessboard" class="chessboard"></div>
+                </div>
+
+                <!-- Game Status -->
+                <div class="game-status">
+                    <div id="gameMessage" class="message"></div>
+                    <div id="conflictInfo" class="conflict-info"></div>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div id="leaderboardSection" class="leaderboard-section">
+                <h3>🏆 Leaderboard</h3>
+                <div class="leaderboard-controls">
+                    <select id="leaderboardSize">
+                        <option value="4">4×4 Board</option>
+                        <option value="5" selected>5×5 Board</option>
+                        <option value="6">6×6 Board</option>
+                        <option value="7">7×7 Board</option>
+                        <option value="8">8×8 Board</option>
+                    </select>
+                    <button id="refreshLeaderboard" class="btn btn-small">Refresh</button>
+                </div>
+                <div class="leaderboard-container">
+                    <table id="leaderboardTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Best Time</th>
+                                <th>Games Won</th>
+                                <th>Win Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <!-- Leaderboard entries will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 N-QueenPro. Challenge your strategic thinking!</p>
+                <div class="footer-stats" id="footerStats">
+                    <!-- Global stats will be shown here -->
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="game.js"></script>
+    <script src="leaderboard.js"></script>
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
