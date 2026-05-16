@@ -104,9 +104,9 @@ class AboutUsManager {
             name: "Akhilesh Yadav",
             image: "https://avatars.githubusercontent.com/u/181719775?s=400&u=021d888025a489910b0cb86571d24c029fe2bba3&v=4", // Replace with your actual image
             email: "akhilyadavbil@gmail.com",
-            linkedin: "https://linkedin.com/in/akhilesh-yadav-0b83032a5",
+            linkedin: "https://www.linkedin.com/in/akhilesh-yadav-0b83032a5/",
             github: "https://github.com/Akhil6242",
-            portfolio: "https://yourportfolio.com"
+            portfolio: "https://iakhilesh-yadav.vercel.app/"
         };
 
         // Update the modal content
